@@ -1,4 +1,10 @@
 //Add all the relevant imports 
+import React, { useEffect, useState } from 'react';
+import { View, Text, Pressable, FlatList, Image, StyleSheet } from 'react-native';
+import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
+import { getAuth } from 'firebase/auth';
+import { ScrollView } from 'react-native-web';
 
 export const ListUsers = () => {
   const [users, setUsers] = useState([]);
@@ -35,7 +41,35 @@ export const ListUsers = () => {
   );
 
   return (
-	//Add a ScrollView to render the users along with their avatars
+    <ScrollView>
+    <FlatList
+      data={users}
+      keyExtractor={item => item.id}
+      renderItem={({ item }) => (
+          <View>
+        <Pressable style={styles.userContainer}
+          onPress={() =>
+            navigation.navigate('PostifyPostsList', { poster: item.email})
+          }
+        >
+  <Image
+    source={{
+      uri: item.avatar ? item.avatar : 'https://randomuser.me/api/portraits/lego/1.jpg',
+    }}
+    style={[
+      styles.avatar,
+      item.email === auth.currentUser.email && styles.currentUserAvatarBorder
+    ]}
+  />
+
+    <Text style={styles.username}>
+      {item.displayName ? item.displayName : item.email}
+    </Text>
+        </Pressable>
+        </View>
+      )}
+    />
+  </ScrollView>
   );
 };
 
