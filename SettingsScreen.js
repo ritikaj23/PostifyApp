@@ -1,5 +1,10 @@
 //include all the relevant imports
-
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Image, StyleSheet, Alert, Pressable } from 'react-native';
+import { query, where, setDoc, collection, getDocs, addDoc,doc } from 'firebase/firestore';
+import { auth, db } from './firebase';
+import Toast from "react-native-toast-message";
+import { useNavigation } from '@react-navigation/native';
 const SettingsScreen = () => {
   const [avatar, setAvatar] = useState(null);
   const [userEmail, setUserEmail] = useState('');
@@ -72,7 +77,36 @@ const SettingsScreen = () => {
   }
 
   return (
-    {/*Add the component that is returned here */}
+    <View style={styles.container}>
+    <Text style={styles.title}>Change the avatar!</Text>
+    <View style={{flexDirection:'row',margin:20}}>
+      <Text style={styles.label}>Display Name</Text>
+      <TextInput
+        style={styles.input}
+        placeholder={auth.currentUser.email}
+        value={displayName??""}
+        onChangeText={setDisplayName}
+      />
+    </View>
+      <View style={styles.avatarContainer}>
+        {avatar ? (
+          <Image source={{ uri: avatar }} style={styles.avatar} />
+        ) : (
+          <Text style={styles.avatarPlaceholder}>Upload Avatar</Text>
+        )}
+      </View>
+      <Text style={styles.label}>Avatar URL</Text>
+      <TextInput
+        style={styles.input}
+        placeholder='https://gravatar.com/avatar/2d5c85de4d60aec7b0f8b03e48292c78?s=400&d=robohash&r=x'
+        value={avatar??""}
+        onChangeText={setAvatar}
+      />
+
+    <Pressable style={styles.button} onPress={saveChanges}>
+      <Text style={styles.buttonText}>Save Changes</Text>
+    </Pressable>
+  </View>
   );
 };
 

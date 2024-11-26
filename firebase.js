@@ -6,13 +6,14 @@ import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyByvHyTPvwSD5iI9gFMeKk89eCoL3P__Ss",
-  authDomain: "reactnative-push-notific-e871b.firebaseapp.com",
-  projectId: "reactnative-push-notific-e871b",
-  storageBucket: "reactnative-push-notific-e871b.appspot.com",
-  messagingSenderId: "98427882719",
-  appId: "1:98427882719:web:891247ae88d46914eaed6a"
-};
+    apiKey: "AIzaSyCbaN-CE5FTmBuBNEfyQqc_42s-LKiDBLE",
+    authDomain: "postify-ff3a7.firebaseapp.com",
+    projectId: "postify-ff3a7",
+    storageBucket: "postify-ff3a7.firebasestorage.app",
+    messagingSenderId: "89252338771",
+    appId: "1:89252338771:web:d4fb2e0dbbfb95f4fffaa6",
+    measurementId: "G-BDQ5LMVLGM"
+  };
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
