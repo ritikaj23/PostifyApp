@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { View, TextInput, Image, Pressable, Text, StyleSheet } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from './firebase';
+import { db, auth } from './firebase';
+import { collection, addDoc } from 'firebase/firestore';
+
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +20,12 @@ const SignUpScreen = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       // Navigate to the Login screen after successful signup
+
+      const userData = {};
+      userData.display_name = email;
+      userData.email = email;
+
+      await addDoc(collection(db, "user_data"), userData);
       navigation.navigate('Login');
       }
       catch(error) {

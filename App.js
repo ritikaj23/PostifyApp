@@ -7,10 +7,10 @@ import { Pressable  } from 'react-native';
 //Add all the screens here
 import SignUpScreen from './SignUpScreen';
 import LoginScreen from './LoginScreen';
-import  ListUsers  from './ListUsers';
 import PostifyPostsList from './PostifyPostsList';
 import PostifyAddPostScreen from './PostifyAddPostScreen';
 import SettingsScreen from './SettingsScreen';
+import { ListUsers } from './ListUsers';
 
 import useAuthentication from './useAuthentication';
 import { Ionicons } from '@expo/vector-icons'; // You can choose other icon sets as well

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, FlatList, Image, StyleSheet } from 'react-native';
 import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
 import { ScrollView } from 'react-native-web';
 
@@ -18,7 +18,7 @@ export const ListUsers = () => {
         try {
           // Create a query to get all avatars except the current user
           const q = query(
-           collection(db, "avatars"),
+           collection(db, "user_data"),
            );
          
            // Execute the query
@@ -40,7 +40,7 @@ export const ListUsers = () => {
     }, [])
   );
 
-  return (
+    return (
     <ScrollView>
     <FlatList
       data={users}
@@ -71,7 +71,7 @@ export const ListUsers = () => {
     />
   </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
 	userContainer: {
